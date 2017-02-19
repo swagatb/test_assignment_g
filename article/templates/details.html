@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="col-sm-12">  
+  <div class="page-header text-muted divider" id="title">
+    {{article.title}}
+  </div>
+  <small class="text-muted"><span id="publication_date"></span> |
+    <a id="author"></a></small>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+
+    <img class="img-responsive postImg" 
+      src="" id="hero"></img>
+    <div class="col-sm-8">
+      <p id="text">
+      </p>
+    </div>
+    <div class="col-sm-4">
+      <img class="img-responsive postImg" 
+      src="" id="article_img"></img>
+    </div>
+  </div>
+</div>
+
+<div class="row divider">    
+   <div class="col-sm-12"><hr></div>
+</div>
+{% endblock content %}

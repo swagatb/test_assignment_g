@@ -1,0 +1,93 @@
+{% load staticfiles %}
+
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <title>GALE Article</title>
+        <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+        <!--[if lt IE 9]>
+            <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link href="{% static "css/styles.css" %}" rel="stylesheet">
+        {% block extra_style %}
+        {% endblock extra_style %}
+    </head>
+    <body>
+<div class="wrapper">
+    <div class="box">
+        <div class="row">
+            <!-- sidebar -->
+            {% block sidebar %}
+            <div class="column col-sm-3" id="sidebar">
+                <a class="logo" href="#">GALE</a>
+                <ul class="nav">
+                    <li class="active"><a href="#featured">Featured</a>
+                    </li>
+                    <li><a href="#stories">Stories</a>
+                    </li>
+                </ul>
+            </div>
+            {% endblock sidebar %}
+            <!-- /sidebar -->
+
+            <!-- content -->
+
+            <div class="column col-sm-9" id="main">
+                <div class="padding">
+                    <div class="full col-sm-9">
+                        
+                        <!-- content -->
+                        {% block content %}
+                        
+                        {% endblock content %}
+                        
+                        {% block read_next %}
+                        <div class="col-sm-12">
+                          <div class="page-header text-muted divider">
+                            What to Read Next
+                          </div>
+                        </div>
+                      
+                        <div class="row">
+                          {% for relate_article in random_articles %}
+                          <div class="col-sm-3 text-center">
+                            <a href="{% url 'details' relate_article.id %}"><img src="{{MEDIA_URL}}{{relate_article.hero}}" class="img-respsonsive img-circle"></a>
+                            <h3><span class="label label-default">{{relate_article.title}}</h3>
+                            <h4>{{relate_article.text|slice:":15"}}... 
+                                <a href="{% url 'details' relate_article.id %}">Read More</a>
+                            </h4>
+                            
+                          </div>
+                          {% endfor %}
+                        </div>
+                      {% endblock read_next %}
+                      
+                        <div class="row divider" id="footer">
+                          <div class="col-sm-6">
+                            
+                          </div>
+                          <div class="col-sm-6">
+                            <p>
+                            <a href="http://www.swagatb.com" class="pull-right">©Copyright Swagat Biswal</a>
+                            </p>
+                          </div>
+                        </div>
+                        
+                      
+                    </div><!-- /col-9 -->
+                </div><!-- /padding -->
+            </div>
+            <!-- /main -->
+        </div>
+    </div>
+</div>
+    <!-- script references -->
+        <script> var csrf_token = "{{csrf_token}}";</script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <script src="{% static "js/bootstrap.min.js" %}"></script>
+        <script src="{% static "js/custom.js" %}"></script>
+    </body>
+</html>
