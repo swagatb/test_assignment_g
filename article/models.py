@@ -29,7 +29,10 @@ class ArticleManager(models.Manager):
         """
         ids = self.filter(publication_date__lte=date.today()
                           ).exclude(id__in = exclude_ids).values_list('id', flat=True)
-        rids = random.sample(ids, numder)
+        try:
+            rids = random.sample(ids, numder)
+        except ValueError:
+            rids = []
         return self.filter(id__in = rids)
 
 
